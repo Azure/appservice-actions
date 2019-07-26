@@ -1,0 +1,21 @@
+{
+  "name": "webapp-container",
+  "version": "1.0.0",
+  "description": "Deploy to webapp container",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sumiran Aggarwal",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.0.0",
+    "@types/q": "^1.5.2",
+    "pipelines-appservice-lib": "^1.0.5"
+  }
+}
