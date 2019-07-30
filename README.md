@@ -17,7 +17,7 @@ inputs:
   package: # id of input
     description: 'Path to package or folder. *.zip, *.war, *.jar or a folder to deploy'
     required: true
-  publish-profile-xml: # id of input
+  publish-profile: # id of input
     description: 'Publish profile (*.publishsettings) file contents with Web Deploy secrets'
     required: false
 outputs:
