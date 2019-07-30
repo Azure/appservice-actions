@@ -1,3 +1,116 @@
+With GitHub AppService Actions you can automate your workflow to deploy Azure WebApps and Azure WebApp for Containers
+
+## Azure web app action metadata file
+
+The action.yml file contains metadata about the Azure web app action.  
+
+```yaml
+# File: action.yml
+
+name: 'Azure WebApp'
+description: 'Deploy Web Apps to Azure'
+inputs: 
+  app-name: # id of input
+    description: 'Name of the Azure Web App'
+    required: true
+    # in the future we may add 'type', for now assume string
+  package: # id of input
+    description: 'Path to package or folder. *.zip, *.war, *.jar or a folder to deploy'
+    required: true
+  publish-profile-xml: # id of input
+    description: 'Publish profile (*.publishsettings) file contents with Web Deploy secrets'
+    required: false
+outputs:
+  webapp-url: # id of output
+    description: 'URL to work with your webapp'
+branding:
+  icon: 'webapp.svg' # vector art to display in the GitHub Marketplace
+  color: 'blue' # optional, decorates the entry in the GitHub Marketplace
+runs:
+  using: 'node'
+  main: 'main.js'
+```
+
+## Workflow file: deploy to Azure WebApp
+
+```yaml
+
+# File: .github/workflows/workflow.yml
+
+on: push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: azure/appservice-actions/webapp@master
+      with: 
+        app-name: <Your web app name>
+        package: '<folder or zip or war or jar to deploy>'
+        publish-profile-xml: '${{ secrets.<Name of secret with publish profile contents> }}'
+      id: myapp-id    
+      
+```
+
+
+## Azure web app for container action metadata file
+
+The action.yml file contains metadata about the web app container action.  
+
+```yaml
+# File: action.yml
+# Azure web app action for containers
+
+name: 'Azure WebApp Container'
+description: 'Deploy Container Web Apps to Azure'
+inputs: 
+  app-name: # id of input
+    description: 'Name of the Azure Web App'
+    required: true
+    # in the future we may add 'type', for now assume string
+  images: # id of input
+    description: 'Specify the fully qualified container image(s) name. For example, 'myregistry.azurecr.io/nginx:latest' or 'python:3.7.2-alpine/'. For multi-container scenario multiple container image names can be provided (multi-line separated)'
+    required: true
+  configuration-file: # id of input
+    description: 'Path of the Docker-Compose file. Should be a fully qualified path or relative to the default working directory. Required for multi-container scenario'
+    required: false
+  container-command: # id of input
+    description: 'Enter the start up command. For ex. dotnet run or dotnet filename.dll'
+    required: false
+outputs:
+  webapp-url: # id of output
+    description: 'URL to work with your webapp'
+branding:
+  icon: 'container-webapp.svg' # vector art to display in the GitHub Marketplace
+  color: 'blue' # optional, decorates the entry in the GitHub Marketplace
+runs:
+  using: 'node'
+  main: '/container-webapp/main.js
+  
+```
+
+## Workflow file: deploy to Azure WebApp for Containers
+
+```yaml
+
+# File: .github/workflows/workflow.yml
+
+on: push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: azure/appservice-actions/webapp-container@master
+      with:
+        app-name: '<Your web app name>'
+        images: '<fully qualified image name with tag, if any>'
+      id: webapp-id
+      
+```
+
 
 # Contributing
 
