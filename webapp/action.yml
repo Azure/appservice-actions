@@ -9,7 +9,7 @@ inputs:
   package:
     description: 'Path to package or folder. *.zip, *.war, *.jar or a folder to deploy'
     required: false
-    default: '/artifacts/*.zip'
+    default: '.'
 outputs:
   webapp-url:
     description: 'URL to work with your webapp'
