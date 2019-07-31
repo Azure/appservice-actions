@@ -120,7 +120,7 @@ export async function archiveFolderForDeployment(isFolderBasedDeployment: boolea
         webDeployPkg = folderPath;
     }
     else {
-        var tempWebPackageZip = generateTemporaryFolderOrZipPath(`${process.env.RUNNER_WORKFOLDER}`, false);
+        var tempWebPackageZip = generateTemporaryFolderOrZipPath(`${process.env.RUNNER_WORKSPACE}`, false);
         webDeployPkg = await zipUtility.archiveFolder(folderPath, "", tempWebPackageZip);
     }
 
