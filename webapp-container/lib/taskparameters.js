@@ -16,9 +16,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(require("@actions/core"));
-const AzureResourceFilterUtility_1 = require("./common/RestUtilities/AzureResourceFilterUtility");
-const AuthorizationHandlerFactory_1 = require("./common/AuthorizationHandlerFactory");
-const packageUtility_1 = require("./common/Utilities/packageUtility");
+const AzureResourceFilterUtility_1 = require("pipelines-appservice-lib/src/RestUtilities/AzureResourceFilterUtility");
+const AuthorizationHandlerFactory_1 = require("pipelines-appservice-lib/src/AuthorizationHandlerFactory");
+const packageUtility_1 = require("pipelines-appservice-lib/src/Utilities/packageUtility");
 const fs = require("fs");
 class TaskParameters {
     constructor() {

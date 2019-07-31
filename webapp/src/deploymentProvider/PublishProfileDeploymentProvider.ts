@@ -1,13 +1,13 @@
 import Q = require('q');
 import fs = require('fs');
 import { TaskParameters } from '../taskparameters';
-import { PackageType } from "../common/Utilities/packageUtility";
-import { KuduServiceUtility } from '../common/RestUtilities/KuduServiceUtility';
-import { Kudu } from '../common/KuduRest/azure-app-kudu-service';
+import { PackageType } from "pipelines-appservice-lib/src/Utilities/packageUtility";
+import { KuduServiceUtility } from 'pipelines-appservice-lib/src/RestUtilities/KuduServiceUtility';
+import { Kudu } from 'pipelines-appservice-lib/src/KuduRest/azure-app-kudu-service';
 import * as core from '@actions/core';
 import { IWebAppDeploymentProvider } from './IWebAppDeploymentProvider';
-import * as utility from '../common/Utilities/utility.js';
-import * as zipUtility from '../common/Utilities/ziputility.js';
+import * as utility from 'pipelines-appservice-lib/src/Utilities/utility.js';
+import * as zipUtility from 'pipelines-appservice-lib/src/Utilities/ziputility.js';
 
 var parseString = require('xml2js').parseString;
 

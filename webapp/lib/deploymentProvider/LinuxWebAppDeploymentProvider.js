@@ -16,9 +16,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const WebAppDeploymentProvider_1 = require("./WebAppDeploymentProvider");
-const packageUtility_1 = require("../common/Utilities/packageUtility");
-const utility = __importStar(require("../common/Utilities/utility.js"));
-const zipUtility = __importStar(require("../common/Utilities/ziputility.js"));
+const packageUtility_1 = require("pipelines-appservice-lib/src/Utilities/packageUtility");
+const utility = __importStar(require("pipelines-appservice-lib/src/Utilities/utility.js"));
+const zipUtility = __importStar(require("pipelines-appservice-lib/src/Utilities/ziputility.js"));
 const core = __importStar(require("@actions/core"));
 const taskparameters_1 = require("../taskparameters");
 class LinuxWebAppDeploymentProvider extends WebAppDeploymentProvider_1.WebAppDeploymentProvider {

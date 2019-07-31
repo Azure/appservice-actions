@@ -16,10 +16,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const taskparameters_1 = require("../taskparameters");
-const KuduServiceUtility_1 = require("../common/RestUtilities/KuduServiceUtility");
-const azure_app_service_1 = require("../common/ArmRest/azure-app-service");
-const AzureAppServiceUtility_1 = require("../common/RestUtilities/AzureAppServiceUtility");
-const AnnotationUtility_1 = require("../common/RestUtilities/AnnotationUtility");
+const KuduServiceUtility_1 = require("pipelines-appservice-lib/src/RestUtilities/KuduServiceUtility");
+const azure_app_service_1 = require("pipelines-appservice-lib/src/ArmRest/azure-app-service");
+const AzureAppServiceUtility_1 = require("pipelines-appservice-lib/src/RestUtilities/AzureAppServiceUtility");
+const AnnotationUtility_1 = require("pipelines-appservice-lib/src/RestUtilities/AnnotationUtility");
 const core = __importStar(require("@actions/core"));
 class WebAppDeploymentProvider {
     constructor() {

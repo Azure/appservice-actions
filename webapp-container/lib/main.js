@@ -17,11 +17,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(require("@actions/core"));
 const crypto = __importStar(require("crypto"));
-const KuduServiceUtility_1 = require("./common/RestUtilities/KuduServiceUtility");
-const azure_app_service_1 = require("./common/ArmRest/azure-app-service");
-const AzureAppServiceUtility_1 = require("./common/RestUtilities/AzureAppServiceUtility");
-const ContainerDeploymentUtility_1 = require("./common/RestUtilities/ContainerDeploymentUtility");
-const AnnotationUtility_1 = require("./common/RestUtilities/AnnotationUtility");
+const KuduServiceUtility_1 = require("pipelines-appservice-lib/src/RestUtilities/KuduServiceUtility");
+const azure_app_service_1 = require("pipelines-appservice-lib/src/ArmRest/azure-app-service");
+const AzureAppServiceUtility_1 = require("pipelines-appservice-lib/src/RestUtilities/AzureAppServiceUtility");
+const ContainerDeploymentUtility_1 = require("pipelines-appservice-lib/src/RestUtilities/ContainerDeploymentUtility");
+const AnnotationUtility_1 = require("pipelines-appservice-lib/src/RestUtilities/AnnotationUtility");
 const taskparameters_1 = require("./taskparameters");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
