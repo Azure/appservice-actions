@@ -29,7 +29,8 @@ function main() {
             if (!!process.env.AZURE_HTTP_USER_AGENT) {
                 prefix = `${process.env.AZURE_HTTP_USER_AGENT}`;
             }
-            core.exportVariable('AZURE_HTTP_USER_AGENT', `${prefix} GITHUBACTIONS_${process.env.GITHUB_ACTION}_${usrAgentRepo}`);
+            let actionName = 'Deploy Web Apps to Azure';
+            core.exportVariable('AZURE_HTTP_USER_AGENT', `${prefix} GITHUBACTIONS_${actionName}_${usrAgentRepo}`);
             let taskParams = taskparameters_1.TaskParameters.getTaskParams();
             let type = DeploymentFactory_1.DEPLOYMENT_PROVIDER_TYPES.PUBLISHPROFILE;
             // get app kind
