@@ -1,8 +1,8 @@
 import * as core from '@actions/core';
-import { AzureResourceFilterUtility } from "pipelines-appservice-lib/src/RestUtilities/AzureResourceFilterUtility";
-import { IAuthorizationHandler } from "pipelines-appservice-lib/src/ArmRest/IAuthorizationHandler";
-import { getHandler } from 'pipelines-appservice-lib/src/AuthorizationHandlerFactory';
-import { exist } from 'pipelines-appservice-lib/src/Utilities/packageUtility';
+import { AzureResourceFilterUtility } from "pipelines-appservice-lib/lib/RestUtilities/AzureResourceFilterUtility";
+import { IAuthorizationHandler } from "pipelines-appservice-lib/lib/ArmRest/IAuthorizationHandler";
+import { getHandler } from 'pipelines-appservice-lib/lib/AuthorizationHandlerFactory';
+import { exist } from 'pipelines-appservice-lib/lib/Utilities/packageUtility';
 import fs = require('fs');
 
 export class TaskParameters {

@@ -1,9 +1,9 @@
 import { TaskParameters } from '../taskparameters';
-import { KuduServiceUtility } from 'pipelines-appservice-lib/src/RestUtilities/KuduServiceUtility';
-import { AzureAppService } from 'pipelines-appservice-lib/src/ArmRest/azure-app-service';
-import { Kudu } from 'pipelines-appservice-lib/src/KuduRest/azure-app-kudu-service';
-import { AzureAppServiceUtility } from 'pipelines-appservice-lib/src/RestUtilities/AzureAppServiceUtility';
-import { addAnnotation } from 'pipelines-appservice-lib/src/RestUtilities/AnnotationUtility';
+import { KuduServiceUtility } from 'pipelines-appservice-lib/lib/RestUtilities/KuduServiceUtility';
+import { AzureAppService } from 'pipelines-appservice-lib/lib/ArmRest/azure-app-service';
+import { Kudu } from 'pipelines-appservice-lib/lib/KuduRest/azure-app-kudu-service';
+import { AzureAppServiceUtility } from 'pipelines-appservice-lib/lib/RestUtilities/AzureAppServiceUtility';
+import { addAnnotation } from 'pipelines-appservice-lib/lib/RestUtilities/AnnotationUtility';
 import * as core from '@actions/core';
 import { IWebAppDeploymentProvider } from './IWebAppDeploymentProvider';
 

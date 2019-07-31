@@ -16,6 +16,6 @@
   "dependencies": {
     "@actions/core": "file:../toolkit/actions-core-0.0.0.tgz",
     "@types/q": "^1.5.2",
-    "pipelines-appservice-lib": "^1.0.2"
+    "pipelines-appservice-lib": "^1.0.3"
   }
 }

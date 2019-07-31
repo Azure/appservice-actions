@@ -1,8 +1,8 @@
 import * as core from '@actions/core';
-import { AzureResourceFilterUtility } from "pipelines-appservice-lib/src/RestUtilities/AzureResourceFilterUtility";
-import { IAuthorizationHandler } from "pipelines-appservice-lib/src/ArmRest/IAuthorizationHandler";
-import { Package } from 'pipelines-appservice-lib/src/Utilities/packageUtility';
-import { getHandler } from 'pipelines-appservice-lib/src/AuthorizationHandlerFactory';
+import { AzureResourceFilterUtility } from "pipelines-appservice-lib/lib/RestUtilities/AzureResourceFilterUtility";
+import { IAuthorizationHandler } from "pipelines-appservice-lib/lib/ArmRest/IAuthorizationHandler";
+import { Package } from 'pipelines-appservice-lib/lib/Utilities/packageUtility';
+import { getHandler } from 'pipelines-appservice-lib/lib/AuthorizationHandlerFactory';
 
 export class TaskParameters {
     private static taskparams: TaskParameters;

@@ -1,9 +1,9 @@
 import { WebAppDeploymentProvider } from "./WebAppDeploymentProvider";
-import { PackageType } from "pipelines-appservice-lib/src/Utilities/packageUtility";
-import { parse } from "pipelines-appservice-lib/src/Utilities/parameterParserUtility";
-import { FileTransformUtility} from "pipelines-appservice-lib/src/Utilities/fileTransformationUtility";
-import * as utility from 'pipelines-appservice-lib/src/Utilities/utility.js';
-import * as zipUtility from 'pipelines-appservice-lib/src/Utilities/ziputility.js';
+import { PackageType } from "pipelines-appservice-lib/lib/Utilities/packageUtility";
+import { parse } from "pipelines-appservice-lib/lib/Utilities/parameterParserUtility";
+import { FileTransformUtility} from "pipelines-appservice-lib/lib/Utilities/fileTransformationUtility";
+import * as utility from 'pipelines-appservice-lib/lib/Utilities/utility.js';
+import * as zipUtility from 'pipelines-appservice-lib/lib/Utilities/ziputility.js';
 import * as core from '@actions/core';
 import { TaskParameters } from "../taskparameters";
 

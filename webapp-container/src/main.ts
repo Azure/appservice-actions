@@ -1,10 +1,10 @@
 import * as core from '@actions/core';
 import * as crypto from "crypto";
-import { KuduServiceUtility } from 'pipelines-appservice-lib/src/RestUtilities/KuduServiceUtility';
-import { AzureAppService } from 'pipelines-appservice-lib/src/ArmRest/azure-app-service';
-import { AzureAppServiceUtility } from 'pipelines-appservice-lib/src/RestUtilities/AzureAppServiceUtility';
-import { ContainerDeploymentUtility } from 'pipelines-appservice-lib/src/RestUtilities/ContainerDeploymentUtility';
-import { addAnnotation } from 'pipelines-appservice-lib/src/RestUtilities/AnnotationUtility';
+import { KuduServiceUtility } from 'pipelines-appservice-lib/lib/RestUtilities/KuduServiceUtility';
+import { AzureAppService } from 'pipelines-appservice-lib/lib/ArmRest/azure-app-service';
+import { AzureAppServiceUtility } from 'pipelines-appservice-lib/lib/RestUtilities/AzureAppServiceUtility';
+import { ContainerDeploymentUtility } from 'pipelines-appservice-lib/lib/RestUtilities/ContainerDeploymentUtility';
+import { addAnnotation } from 'pipelines-appservice-lib/lib/RestUtilities/AnnotationUtility';
 import { TaskParameters } from './taskparameters';
 
 async function main() {

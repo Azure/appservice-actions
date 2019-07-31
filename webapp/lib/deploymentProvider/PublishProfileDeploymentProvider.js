@@ -16,12 +16,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const taskparameters_1 = require("../taskparameters");
-const packageUtility_1 = require("pipelines-appservice-lib/src/Utilities/packageUtility");
-const KuduServiceUtility_1 = require("pipelines-appservice-lib/src/RestUtilities/KuduServiceUtility");
-const azure_app_kudu_service_1 = require("pipelines-appservice-lib/src/KuduRest/azure-app-kudu-service");
+const packageUtility_1 = require("pipelines-appservice-lib/lib/Utilities/packageUtility");
+const KuduServiceUtility_1 = require("pipelines-appservice-lib/lib/RestUtilities/KuduServiceUtility");
+const azure_app_kudu_service_1 = require("pipelines-appservice-lib/lib/KuduRest/azure-app-kudu-service");
 const core = __importStar(require("@actions/core"));
-const utility = __importStar(require("pipelines-appservice-lib/src/Utilities/utility.js"));
-const zipUtility = __importStar(require("pipelines-appservice-lib/src/Utilities/ziputility.js"));
+const utility = __importStar(require("pipelines-appservice-lib/lib/Utilities/utility.js"));
+const zipUtility = __importStar(require("pipelines-appservice-lib/lib/Utilities/ziputility.js"));
 var parseString = require('xml2js').parseString;
 class PublishProfileDeploymentProvider {
     PreDeploymentStep() {
