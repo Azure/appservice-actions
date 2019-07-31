@@ -51,7 +51,7 @@ export class WindowsWebAppDeploymentProvider extends WebAppDeploymentProvider {
                 break;
 
             case PackageType.folder:
-                let tempPackagePath = utility.generateTemporaryFolderOrZipPath(`${process.env.RUNNER_TEMPDIRECTORY}`, false);
+                let tempPackagePath = utility.generateTemporaryFolderOrZipPath(`${process.env.RUNNER_TEMP}`, false);
                 webPackage = await zipUtility.archiveFolder(webPackage, "", tempPackagePath) as string;
                 core.debug("Compressed folder into zip " +  webPackage);
                 

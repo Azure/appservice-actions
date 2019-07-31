@@ -20,5 +20,5 @@ branding:
   icon: 'container-webapp.svg'
   color: 'blue'
 runs:
-  using: 'node'
+  using: 'node12'
   main: 'lib/main.js'

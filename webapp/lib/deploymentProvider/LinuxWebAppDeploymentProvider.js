@@ -30,7 +30,7 @@ class LinuxWebAppDeploymentProvider extends WebAppDeploymentProvider_1.WebAppDep
             yield this.kuduServiceUtility.warmpUp();
             switch (packageType) {
                 case packageUtility_1.PackageType.folder:
-                    let tempPackagePath = utility.generateTemporaryFolderOrZipPath(`${process.env.RUNNER_TEMPDIRECTORY}`, false);
+                    let tempPackagePath = utility.generateTemporaryFolderOrZipPath(`${process.env.RUNNER_TEMP}`, false);
                     let archivedWebPackage = yield zipUtility.archiveFolder(packagePath, "", tempPackagePath);
                     core.debug("Compressed folder into zip " + archivedWebPackage);
                     this.zipDeploymentID = yield this.kuduServiceUtility.deployUsingZipDeploy(archivedWebPackage);

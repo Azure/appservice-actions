@@ -43,7 +43,7 @@ class ContainerDeploymentUtility {
         });
     }
     _updateImagesInConfigFile(multicontainerConfigFile, images) {
-        const tempDirectory = `${process.env.RUNNER_TEMPDIRECTORY}`;
+        const tempDirectory = `${process.env.RUNNER_TEMP}`;
         var contents = fs.readFileSync(multicontainerConfigFile).toString();
         var imageList = images.split("\n");
         imageList.forEach((image) => {

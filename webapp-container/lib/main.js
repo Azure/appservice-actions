@@ -33,8 +33,7 @@ function main() {
             if (!!process.env.AZURE_HTTP_USER_AGENT) {
                 prefix = `${process.env.AZURE_HTTP_USER_AGENT}`;
             }
-            let actionName = 'Deploy Web Apps to Azure';
-            core.exportVariable('AZURE_HTTP_USER_AGENT', `${prefix} GITHUBACTIONS_${actionName}_${usrAgentRepo}`);
+            core.exportVariable('AZURE_HTTP_USER_AGENT', `${prefix} GITHUBACTIONS_${process.env.GITHUB_ACTION}_${usrAgentRepo}`);
             var taskParams = taskparameters_1.TaskParameters.getTaskParams();
             yield taskParams.getResourceDetails();
             core.debug("Predeployment Step Started");

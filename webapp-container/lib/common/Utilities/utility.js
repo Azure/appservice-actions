@@ -100,7 +100,7 @@ function copyDirectory(sourceDirectory, destDirectory) {
 exports.copyDirectory = copyDirectory;
 function generateTemporaryFolderForDeployment(isFolderBasedDeployment, webDeployPkg, packageType) {
     return __awaiter(this, void 0, void 0, function* () {
-        var folderName = `${process.env.RUNNER_TEMPDIRECTORY}`;
+        var folderName = `${process.env.RUNNER_TEMP}`;
         var folderPath = generateTemporaryFolderOrZipPath(folderName, true);
         if (isFolderBasedDeployment || packageType === packageUtility_1.PackageType.jar) {
             console.log('Copying Web Packge: ' + webDeployPkg + ' to temporary location: ' + folderPath);
@@ -127,7 +127,7 @@ function archiveFolderForDeployment(isFolderBasedDeployment, folderPath) {
             webDeployPkg = folderPath;
         }
         else {
-            var tempWebPackageZip = generateTemporaryFolderOrZipPath(`${process.env.RUNNER_WORKFOLDER}`, false);
+            var tempWebPackageZip = generateTemporaryFolderOrZipPath(`${process.env.RUNNER_WORKSPACE}`, false);
             webDeployPkg = yield zipUtility.archiveFolder(folderPath, "", tempWebPackageZip);
         }
         return {
@@ -150,6 +150,6 @@ function getFileNameFromPath(filePath, extension) {
 }
 exports.getFileNameFromPath = getFileNameFromPath;
 function getTempDirectory() {
-    return `${process.env.RUNNER_TEMPDIRECTORY}` || os.tmpdir();
+    return `${process.env.RUNNER_TEMP}` || os.tmpdir();
 }
 exports.getTempDirectory = getTempDirectory;

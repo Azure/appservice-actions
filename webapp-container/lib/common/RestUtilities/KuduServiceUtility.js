@@ -111,7 +111,7 @@ class KuduServiceUtility {
                 core.debug(`ZIP DEPLOY - Performing post zip-deploy operation: ${oldDeploymentID} => ${activeDeploymentID}`);
                 let manifestFileContent = yield this._webAppKuduService.getFileContent(`${deploymentFolder}/${oldDeploymentID}`, manifestFileName);
                 if (!!manifestFileContent) {
-                    let tempManifestFile = path.join(`${process.env.RUNNER_TEMPDIRECTORY}`, manifestFileName);
+                    let tempManifestFile = path.join(`${process.env.RUNNER_TEMP}`, manifestFileName);
                     fs.writeFileSync(tempManifestFile, manifestFileContent);
                     yield this._webAppKuduService.uploadFile(`${deploymentFolder}/${activeDeploymentID}`, manifestFileName, tempManifestFile);
                 }

@@ -34,7 +34,7 @@ export class ContainerDeploymentUtility {
     }
 
     private _updateImagesInConfigFile(multicontainerConfigFile, images): string {
-        const tempDirectory = `${process.env.RUNNER_TEMPDIRECTORY}`;
+        const tempDirectory = `${process.env.RUNNER_TEMP}`;
         var contents = fs.readFileSync(multicontainerConfigFile).toString();
         var imageList = images.split("\n");
         imageList.forEach((image: string) => {

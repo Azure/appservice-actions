@@ -93,7 +93,7 @@ export function copyDirectory(sourceDirectory: string, destDirectory: string) {
 }
 
 export async function generateTemporaryFolderForDeployment(isFolderBasedDeployment: boolean, webDeployPkg: string, packageType: PackageType) {  
-    var folderName = `${process.env.RUNNER_TEMPDIRECTORY}`;
+    var folderName = `${process.env.RUNNER_TEMP}`;
     var folderPath = generateTemporaryFolderOrZipPath(folderName, true);
     if(isFolderBasedDeployment || packageType === PackageType.jar) {
         console.log('Copying Web Packge: ' + webDeployPkg + ' to temporary location: ' + folderPath);
@@ -144,5 +144,5 @@ export function getFileNameFromPath(filePath: string, extension?: string): strin
 }
 
 export function getTempDirectory(): string {
-    return `${process.env.RUNNER_TEMPDIRECTORY}` || os.tmpdir();
+    return `${process.env.RUNNER_TEMP}` || os.tmpdir();
 }
