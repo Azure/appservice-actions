@@ -1,8 +1,12 @@
-With GitHub AppService Actions you can automate your workflow to deploy Azure WebApps and Azure WebApp for Containers
+# Azure App Service Actions for GitHub
 
-## Azure web app action metadata file
+With the Azure App Service Actions for GitHub, you can automate your workflow to deploy [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/) and [Azure Web Apps for Containers](https://azure.microsoft.com/en-us/services/app-service/containers/) using GitHub Actions.
 
-The action.yml file contains metadata about the Azure web app action.  
+Get started today with a [free Azure account](https://azure.com/free/open-source)!
+
+## Azure Web App action metadata file
+
+The action.yml file contains metadata about the Azure Web App action.  
 
 ```yaml
 # File: action.yml
@@ -111,7 +115,7 @@ jobs:
       
 ```
 ## Container CI
-[GitHub Actions for K8s](https://github.com/Azure/k8s-actions) contains Actions to [log in to a private container registry](https://docs.docker.com/engine/reference/commandline/login/) such as [Azure Container registry](https://azure.microsoft.com/en-us/services/container-registry/). Once login is done, the next set of actions in the workflow can perform tasks such as building, tagging and pushing containers.
+[Kubernetes Actions for GitHub](https://github.com/Azure/k8s-actions) contains Actions to [log in to a private container registry](https://docs.docker.com/engine/reference/commandline/login/) such as [Azure Container registry](https://azure.microsoft.com/en-us/services/container-registry/). Once login is done, the next set of actions in the workflow can perform tasks such as building, tagging and pushing containers.
 
 # Contributing
 
