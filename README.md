@@ -1,4 +1,4 @@
-# Azure App Service Actions for GitHub
+# GitHub Actions for deploying to Azure App Service
 
 With the Azure App Service Actions for GitHub, you can automate your workflow to deploy [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/) and [Azure Web Apps for Containers](https://azure.microsoft.com/en-us/services/app-service/containers/) using GitHub Actions.
 
@@ -115,7 +115,7 @@ jobs:
       
 ```
 ## Container CI
-[Kubernetes Actions for GitHub](https://github.com/Azure/k8s-actions) contains Actions to [log in to a private container registry](https://docs.docker.com/engine/reference/commandline/login/) such as [Azure Container registry](https://azure.microsoft.com/en-us/services/container-registry/). Once login is done, the next set of actions in the workflow can perform tasks such as building, tagging and pushing containers.
+[Kubernetes Actions for GitHub](https://github.com/Azure/k8s-actions) contains Actions to [log in to a private container registry](https://docs.docker.com/engine/reference/commandline/login/) such as [Azure Container registry](https://azure.microsoft.com/en-us/services/container-registry/). Once login is done, the next set of Actions in the workflow can perform tasks such as building, tagging and pushing containers.
 
 # Contributing
 
