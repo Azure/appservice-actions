@@ -86,18 +86,18 @@ jobs:
 
     - uses: azure/k8s-actions/docker-login@master
       with:
-        login-server: ronacr.azurecr.io
+        login-server: contoso.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     
     - run: |
-        docker build . -t ronacr.azurecr.io/nodejssampleapp:${{ github.sha }}
-        docker push ronacr.azurecr.io/nodejssampleapp:${{ github.sha }} 
+        docker build . -t contoso.azurecr.io/nodejssampleapp:${{ github.sha }}
+        docker push contoso.azurecr.io/nodejssampleapp:${{ github.sha }} 
       
     - uses: azure/appservice-actions/webapp-container@master
       with:
-        app-name: 'demogod'
-        images: 'ronacr.azurecr.io/nodejssampleapp:${{ github.sha }}'
+        app-name: 'node-rnc'
+        images: 'contoso.azurecr.io/nodejssampleapp:${{ github.sha }}'
 
 
 ```
