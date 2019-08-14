@@ -4,38 +4,22 @@ With the Azure App Service Actions for GitHub, you can automate your workflow to
 
 Get started today with a [free Azure account](https://azure.com/free/open-source)!
 
-## Azure Web App action metadata file
+The repository contains the following GitHub Actions:
+* [Azure WebApp](https://github.com/Azure/appservice-actions/blob/master/webapp/action.yml): Deploy to Azure WebApp (Windows or Linux). Support deploying *.jar, *.war, *.zip or a folder.
+* [Azure WebApp for Containers](https://github.com/Azure/appservice-actions/blob/master/webapp-container/action.yml): Deploy to Azure WebApp for Containers. Supports deploying a single container image or multiple containers.
 
-The action.yml file contains metadata about the Azure Web App action.  
+End to end workflow samples shown below relies on following additional GitHub Actions
 
-```yaml
-# File: action.yml
+* [checkout](https://https://github.com/actions/checkout/blob/master/action.yml) 
+* [Azure login](https://github.com/Azure/actions/blob/master/login/action.yml) Login to Azure using Azure Service Principal. Once login is done, the next set of Azure actions in the workflow can perform re-use the same session within the job
+* [docker-login](https://github.com/Azure/container-actions/tree/master/docker-login) : Actions to [log in to a private container registry](https://docs.docker.com/engine/reference/commandline/login/) such as [Azure Container registry](https://azure.microsoft.com/en-us/services/container-registry/). Once login is done, the next set of Actions in the workflow can perform tasks such as building, tagging and pushing containers.
 
-name: 'Azure WebApp'
-description: 'Deploy Web Apps to Azure'
-inputs: 
-  app-name: # id of input
-    description: 'Name of the Azure Web App'
-    required: true
-    # in the future we may add 'type', for now assume string
-  package: # id of input
-    description: 'Path to package or folder. *.zip, *.war, *.jar or a folder to deploy'
-    required: true
-  publish-profile: # id of input
-    description: 'Publish profile (*.publishsettings) file contents with Web Deploy secrets'
-    required: false
-outputs:
-  webapp-url: # id of output
-    description: 'URL to work with your webapp'
-branding:
-  icon: 'webapp.svg' # vector art to display in the GitHub Marketplace
-  color: 'blue' # optional, decorates the entry in the GitHub Marketplace
-runs:
-  using: 'node'
-  main: 'main.js'
-```
 
-## Workflow file: deploy to Azure WebApp
+# Usage
+
+Sample workflow to build and deploy Node.js app to Azure WebApp
+
+### Deploy a Node.js app to Azure WebApp
 
 ```yaml
 
@@ -44,78 +28,97 @@ runs:
 on: push
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-
+    # checkout the repo
+    - uses: actions/checkout@master
+    
+    # install dependencies, build, and test
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+        
+    # deploy web app using publish profile credentials
     - uses: azure/appservice-actions/webapp@master
       with: 
-        app-name: <Your web app name>
-        package: '<folder or zip or war or jar to deploy>'
-        publish-profile-xml: '${{ secrets.<Name of secret with publish profile contents> }}'
-      id: myapp-id    
-      
+        app-name: node-rn
+        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+        
+
 ```
 
+#### Configure deployment credentials:
 
-## Azure web app for container action metadata file
+For any credentials like Azure Service Principal, Publish Profile etc add them as [secrets](https://developer.github.com/actions/managing-workflows/storing-secrets/) in the GitHub repository and then use them in the workflow.
 
-The action.yml file contains metadata about the web app container action.  
+The above example uses app-level credentials i.e., publish profile file for deployment. 
 
-```yaml
-# File: action.yml
-# Azure web app action for containers
+Follow the steps to configure the secret:
+  * Download the publish profile from the portal (Get Publish profile option)
+  * Define a new secret under your repository settings, Add secret menu
+  * Paste the contents for the downloaded publish profile file into the secret's value field
+  * Now in the workflow file in your branch: `.github/workflows/workflow.yml` replace the secret in Azure login action with your secret (Refer to the example above)
+    
 
-name: 'Azure WebApp Container'
-description: 'Deploy Container Web Apps to Azure'
-inputs: 
-  app-name: # id of input
-    description: 'Name of the Azure Web App'
-    required: true
-    # in the future we may add 'type', for now assume string
-  images: # id of input
-    description: 'Specify the fully qualified container image(s) name. For example, 'myregistry.azurecr.io/nginx:latest' or 'python:3.7.2-alpine/'. For multi-container scenario multiple container image names can be provided (multi-line separated)'
-    required: true
-  configuration-file: # id of input
-    description: 'Path of the Docker-Compose file. Should be a fully qualified path or relative to the default working directory. Required for multi-container scenario'
-    required: false
-  container-command: # id of input
-    description: 'Enter the start up command. For ex. dotnet run or dotnet filename.dll'
-    required: false
-outputs:
-  webapp-url: # id of output
-    description: 'URL to work with your webapp'
-branding:
-  icon: 'container-webapp.svg' # vector art to display in the GitHub Marketplace
-  color: 'blue' # optional, decorates the entry in the GitHub Marketplace
-runs:
-  using: 'node'
-  main: '/container-webapp/main.js
-  
-```
-
-## Workflow file: deploy to Azure WebApp for Containers
+### End to end workflow sample to build and deploy a Node.js app to Azure WebApp Container
 
 ```yaml
 
-# File: .github/workflows/workflow.yml
+on: [push]
 
-on: push
+name: Node.js
 
 jobs:
-  deploy:
+
+  build-and-deploy:
+    name: Build
     runs-on: ubuntu-latest
     steps:
 
+    - uses: actions/checkout@master
+    
+    - uses: azure/actions/login@master
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/k8s-actions/docker-login@master
+      with:
+        login-server: ronacr.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    - run: |
+        docker build . -t ronacr.azurecr.io/nodejssampleapp:${{ github.sha }}
+        docker push ronacr.azurecr.io/nodejssampleapp:${{ github.sha }} 
+      
     - uses: azure/appservice-actions/webapp-container@master
       with:
-        app-name: '<Your web app name>'
-        images: '<fully qualified image name with tag, if any>'
-      id: webapp-id
-      
+        app-name: 'demogod'
+        images: 'ronacr.azurecr.io/nodejssampleapp:${{ github.sha }}'
+
+
 ```
-## Container CI
-[Kubernetes Actions for GitHub](https://github.com/Azure/k8s-actions) contains Actions to [log in to a private container registry](https://docs.docker.com/engine/reference/commandline/login/) such as [Azure Container registry](https://azure.microsoft.com/en-us/services/container-registry/). Once login is done, the next set of Actions in the workflow can perform tasks such as building, tagging and pushing containers.
+
+#### Configure deployment credentials:
+
+For any credentials like Azure Service Principal, Publish Profile etc add them as [secrets](https://developer.github.com/actions/managing-workflows/storing-secrets/) in the GitHub repository and then use them in the workflow.
+
+The above example uses user-level credentials i.e., Azure Service Principal for deployment. 
+
+Follow the steps to configure the secret:
+  * Define a new secret under your repository settings, Add secret menu
+  * Paste the contents of the [az cli](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) command 
+```bash  
+  `az ad sp create-for-rbac --name <SPN name> --scopes /subscriptions/<subscription-id>/resourceGroups/<resource-group> --role contributor --sdk- auth` as value of secret variable, for example 'AZURE_CREDENTIALS'
+```
+  * Now in the workflow file in your branch: `.github/workflows/workflow.yml` replace the secret in Azure login action with your secret (Refer to the example above)
+  * Similarly, define following additional secrets for the container registry credentials and set them in Docker login action
+      * REGISTRY_USERNAME
+      * REGISTRY_PASSWORD
+
 
 # Contributing
 
