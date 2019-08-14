@@ -57,10 +57,10 @@ For any credentials like Azure Service Principal, Publish Profile etc add them a
 The above example uses app-level credentials i.e., publish profile file for deployment. 
 
 Follow the steps to configure the secret:
-  * Download the publish profile from the portal (Get Publish profile option)
+  * Download the publish profile for the WebApp from the portal (Get Publish profile option)
   * Define a new secret under your repository settings, Add secret menu
   * Paste the contents for the downloaded publish profile file into the secret's value field
-  * Now in the workflow file in your branch: `.github/workflows/workflow.yml` replace the secret for the input `publish-profile:` of deploy Azure WebApp action (Refer to the example above)
+  * Now in the workflow file in your branch: `.github/workflows/workflow.yml` replace the secret for the input `publish-profile:` of the deploy Azure WebApp action (Refer to the example above)
     
 
 ### End to end workflow sample to build and deploy a Node.js app to Azure WebApp Container
