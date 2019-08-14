@@ -60,7 +60,7 @@ Follow the steps to configure the secret:
   * Download the publish profile from the portal (Get Publish profile option)
   * Define a new secret under your repository settings, Add secret menu
   * Paste the contents for the downloaded publish profile file into the secret's value field
-  * Now in the workflow file in your branch: `.github/workflows/workflow.yml` replace the secret in Azure login action with your secret (Refer to the example above)
+  * Now in the workflow file in your branch: `.github/workflows/workflow.yml` replace the secret for the input `publish-profile:` of deploy Azure WebApp action (Refer to the example above)
     
 
 ### End to end workflow sample to build and deploy a Node.js app to Azure WebApp Container
