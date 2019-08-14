@@ -110,9 +110,14 @@ The above example uses user-level credentials i.e., Azure Service Principal for 
 
 Follow the steps to configure the secret:
   * Define a new secret under your repository settings, Add secret menu
-  * Paste the contents of the [az cli](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) command 
+  * Paste the contents of the below [az cli](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) command as the value of secret variable, for example 'AZURE_CREDENTIALS'
 ```bash  
-  `az ad sp create-for-rbac --name <SPN name> --scopes /subscriptions/<subscription-id>/resourceGroups/<resource-group> --role contributor --sdk- auth` as value of secret variable, for example 'AZURE_CREDENTIALS'
+
+   az ad sp create-for-rbac --name "myApp" --role contributor \
+                            --scopes /subscriptions/{subscription-id}/resourceGroups/{resource-group} \
+                            --sdk-auth
+                            
+  # In the above command replace {subscription-id} and {resource-group} with your subscription id and the resource group name
 ```
   * Now in the workflow file in your branch: `.github/workflows/workflow.yml` replace the secret in Azure login action with your secret (Refer to the example above)
   * Similarly, define following additional secrets for the container registry credentials and set them in Docker login action
