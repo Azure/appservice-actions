@@ -117,7 +117,7 @@ Follow the steps to configure the secret:
                             --scopes /subscriptions/{subscription-id}/resourceGroups/{resource-group} \
                             --sdk-auth
                             
-  # In the above command replace {subscription-id} and {resource-group} with your subscription id and the resource group name
+  # Replace {subscription-id}, {resource-group} with the subscription, resource group details of the WebApp
 ```
   * Now in the workflow file in your branch: `.github/workflows/workflow.yml` replace the secret in Azure login action with your secret (Refer to the example above)
   * Similarly, define following additional secrets for the container registry credentials and set them in Docker login action
