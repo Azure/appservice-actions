@@ -14,7 +14,7 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "@actions/core": "file:../toolkit/actions-core-0.0.0.tgz",
+    "@actions/core": "^1.0.0",
     "@types/q": "^1.5.2",
     "pipelines-appservice-lib": "^1.0.3"
   }
