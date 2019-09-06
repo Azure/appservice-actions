@@ -96,6 +96,8 @@ export class PublishProfileDeploymentProvider implements IWebAppDeploymentProvid
             username: res.userName,
             password: res.userPWD
         };
+        console.log(`::add-mask::${creds.password}`);
+        console.log(`::add-mask::${creds.uri}`);
         if(creds.uri.indexOf("scm") < 0) {
             throw new Error("Publish profile does not contain kudu URL");
         }
