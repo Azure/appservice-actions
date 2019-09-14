@@ -1,5 +1,13 @@
 import * as core from '@actions/core';
 import * as crypto from "crypto";
+
+// Set user agent varable
+var prefix = !!process.env.AZURE_HTTP_USER_AGENT ? `${process.env.AZURE_HTTP_USER_AGENT}` : "";
+let usrAgentRepo = crypto.createHash('sha256').update(`${process.env.GITHUB_REPOSITORY}`).digest('hex');
+let actionName = 'DeployWebAppToAzure';
+let userAgentString = (!!prefix ? `${prefix}+` : '') + `GITHUBACTIONS_${actionName}_${usrAgentRepo}`;
+core.exportVariable('AZURE_HTTP_USER_AGENT', userAgentString);
+
 import { KuduServiceUtility } from 'pipelines-appservice-lib/lib/RestUtilities/KuduServiceUtility';
 import { AzureAppService } from 'pipelines-appservice-lib/lib/ArmRest/azure-app-service';
 import { AzureAppServiceUtility } from 'pipelines-appservice-lib/lib/RestUtilities/AzureAppServiceUtility';
@@ -11,15 +19,6 @@ async function main() {
     let isDeploymentSuccess: boolean = true;
 
     try {
-        // Set user agent varable
-        let usrAgentRepo = crypto.createHash('sha256').update(`${process.env.GITHUB_REPOSITORY}`).digest('hex');
-        let prefix = "";
-        if(!!process.env.AZURE_HTTP_USER_AGENT) {
-        prefix = `${process.env.AZURE_HTTP_USER_AGENT}`
-        }
-        let actionName = 'Deploy Web Apps to Azure';
-        core.exportVariable('AZURE_HTTP_USER_AGENT', `${prefix} GITHUBACTIONS_${actionName}_${usrAgentRepo}`);
-
         var taskParams = TaskParameters.getTaskParams();
         await taskParams.getResourceDetails();
 
@@ -52,7 +51,10 @@ async function main() {
         console.log('App Service Application URL: ' + appServiceApplicationUrl);
         core.setOutput('webapp-url', appServiceApplicationUrl);
         
+        // Reset AZURE_HTTP_USER_AGENT
+        core.exportVariable('AZURE_HTTP_USER_AGENT', prefix);
         core.debug(isDeploymentSuccess ? "Deployment Succeded" : "Deployment failed");
+        core.warning('This action is moved to azure/webapps-container-deploy repository, update your workflows to use those actions instead.');
     }
 }
 

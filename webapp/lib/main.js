@@ -16,22 +16,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const taskparameters_1 = require("./taskparameters");
-const DeploymentFactory_1 = require("./deploymentProvider/DeploymentFactory");
 const core = __importStar(require("@actions/core"));
 const crypto = __importStar(require("crypto"));
+// Set user agent varable
+var prefix = !!process.env.AZURE_HTTP_USER_AGENT ? `${process.env.AZURE_HTTP_USER_AGENT}` : "";
+let usrAgentRepo = crypto.createHash('sha256').update(`${process.env.GITHUB_REPOSITORY}`).digest('hex');
+let actionName = 'DeployWebAppToAzure';
+let userAgentString = (!!prefix ? `${prefix}+` : '') + `GITHUBACTIONS_${actionName}_${usrAgentRepo}`;
+core.exportVariable('AZURE_HTTP_USER_AGENT', userAgentString);
+const taskparameters_1 = require("./taskparameters");
+const DeploymentFactory_1 = require("./deploymentProvider/DeploymentFactory");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         let isDeploymentSuccess = true;
         try {
-            // Set user agent varable
-            let usrAgentRepo = crypto.createHash('sha256').update(`${process.env.GITHUB_REPOSITORY}`).digest('hex');
-            let prefix = "";
-            if (!!process.env.AZURE_HTTP_USER_AGENT) {
-                prefix = `${process.env.AZURE_HTTP_USER_AGENT}`;
-            }
-            let actionName = 'Deploy Web Apps to Azure';
-            core.exportVariable('AZURE_HTTP_USER_AGENT', `${prefix} GITHUBACTIONS_${actionName}_${usrAgentRepo}`);
             let taskParams = taskparameters_1.TaskParameters.getTaskParams();
             let type = DeploymentFactory_1.DEPLOYMENT_PROVIDER_TYPES.PUBLISHPROFILE;
             // get app kind
@@ -54,7 +52,10 @@ function main() {
             if (deploymentProvider != null) {
                 yield deploymentProvider.UpdateDeploymentStatus(isDeploymentSuccess, true);
             }
+            // Reset AZURE_HTTP_USER_AGENT
+            core.exportVariable('AZURE_HTTP_USER_AGENT', prefix);
             core.debug(isDeploymentSuccess ? "Deployment Succeeded" : "Deployment failed");
+            core.warning('This action is moved to azure/webapps-deploy repository, update your workflows to use those actions instead.');
         }
     });
 }
