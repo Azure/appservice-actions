@@ -1,12 +1,13 @@
 # web app action is moved to https://github.com/Azure/webapps-deploy, update your workflows to use the new action.
 name: 'Azure WebApp'
 description: 'Deploy Web Apps to Azure'
+deprecationMessage: 'This action is ARCHIVED and will not receive any updates, update your workflows to use azure/webapps-deploy@v1'
 inputs: 
   publish-profile:
     description: 'Publish profile (*.publishsettings) file contents with Web Deploy secrets'
   app-name:
     description: 'Name of the Azure Web App'
-    deprecationMessage: 'This action is ARCHIVED and will not receive any updates, update your workflows to use azure/webapps-deploy@v1'
+    
 
   package:
     description: 'Path to package or folder. *.zip, *.war, *.jar or a folder to deploy'
